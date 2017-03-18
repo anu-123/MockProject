@@ -11,13 +11,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.hp.mockproject.Presenter.HomePresenter;
 import com.example.hp.mockproject.R;
+import com.example.hp.mockproject.View.IHomeView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements IHomeView {
     private Toolbar home_toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    private HomePresenter homePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         initialise();
         setNavigationDrawer();
-
         setNavigationMenuItems();
 
     }
@@ -83,6 +85,13 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_name);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        homePresenter = new HomePresenter();
+        homePresenter.attachView(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
 
     }
 }
