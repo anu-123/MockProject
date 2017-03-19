@@ -37,9 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_below="@+id/edt_name"
+        android:layout_marginTop="16dp"
         android:background="@android:color/holo_green_dark"
         android:text="Login"
-        android:layout_marginTop="16dp"
         android:textSize="16sp" />
 
 

@@ -2,6 +2,8 @@ package com.example.hp.mockproject.UI;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.view.View;
 
 import com.example.hp.mockproject.Presenter.HomePresenter;
 import com.example.hp.mockproject.R;
+import com.example.hp.mockproject.Tabs.TabFragment;
 import com.example.hp.mockproject.View.IHomeView;
 
 public class HomeActivity extends AppCompatActivity implements IHomeView {
@@ -21,14 +24,28 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private HomePresenter homePresenter;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
+    private TabFragment tabFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         initialise();
         setNavigationDrawer();
         setNavigationMenuItems();
+        if(savedInstanceState==null)
+        {
+            add_fragmnet();
+        }
+    }
+
+    private void add_fragmnet() {
+        fragmentManager=getSupportFragmentManager();
+        transaction=fragmentManager.beginTransaction();
+        transaction.add(R.id.frag_container,tabFragment,"tabMainFrag").commit();
 
     }
 
@@ -54,6 +71,8 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_home:
+                        break;
+                    case R.id.item_profile:
                         break;
                 }
                 return false;
@@ -87,6 +106,7 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         homePresenter = new HomePresenter();
         homePresenter.attachView(this);
+        tabFragment=TabFragment.newInstance();
 
     }
 

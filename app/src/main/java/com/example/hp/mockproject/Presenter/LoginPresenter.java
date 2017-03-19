@@ -1,6 +1,5 @@
 package com.example.hp.mockproject.Presenter;
 
-import android.text.TextUtils;
 
 import com.example.hp.mockproject.View.ILoginView;
 
@@ -16,7 +15,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     }
 
     public void checkEmpty(String msg) {
-        if (TextUtils.isEmpty(msg)) {
+        if (msg.length() == 0) {
 
             getView().showToast();
         } else {
